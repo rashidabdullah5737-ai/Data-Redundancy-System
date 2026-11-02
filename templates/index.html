@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Redundancy Removal System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Data Redundancy Removal System</h1>
+    <p class="subtitle">CodeAlpha Cloud Computing Project</p>
+
+    <div class="dashboard">
+        <h2>Total Unique Records</h2>
+        <h1>{{ total_records }}</h1>
+    </div>
+
+    <div class="form-box">
+        <h2>Add New Record</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+            <input type="text" name="name" placeholder="Enter name">
+            <input type="email" name="email" placeholder="Enter email">
+            <button type="submit">Validate & Add Record</button>
+        </form>
+    </div>
+
+    <div class="records-box">
+        <h2>Stored Records</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">No records found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
